@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+*{
+margin: 0%;
+padding: 0%;
+}
+body{
+	width: 100%;
+	height: 300vh;
+	background: linear-gradient(75deg,black,rgba(1, 1, 89, 0.823));
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+.username{
+width: 100%;
+height: 10vh;
+color: white;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.divtop{
+width:100%;
+height:80%;
+display: flex;
+flex-wrap:wrap;
+justify-content:center;
+align-items: center;
+
+}
+
+.card2{
+width: 75%;
+height: 25vh;
+border-radius:10px 70px 70px 10px;
+background-color: rgba(255, 255, 255, 0.21);
+}
+.card1{
+width: 75%;
+height: 25vh;
+border-radius:70px 10px 10px 70px;
+background-color: rgba(255, 255, 255, 0.21);
+}
+.card22{
+width: 100%;
+height: 15vh;
+background-color: rgba(255, 255, 255, 0.21);
+margin-top: 0%;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+.card{
+margin-top: 2%;
+display: flex;
+}
+a{
+display:flex;
+flex-direction: row;
+width: 100%;
+height: 25vh;
+justify-content: space-around;
+align-self: center;
+text-decoration: none;
+overflow: hidden;
+}
+.imgitem{
+width:75%;
+height:28vh;
+border-radius: 100%;
+}
+.d{
+	width: 70%;
+	height: 25vh;
+	display: flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items: center;
+	color: white;
+}
+.dimg{
+	width: 30%;
+	display: flex;
+	align-self: center;
+	overflow: hidden;
+}
+h3{
+width:70%;
+height:7vh;
+font-family: serif;
+font-size: x-large;
+text-align: center;
+}
+#h3{
+	font-weight: bold;
+	font-size: medium;
+	font-family: monospace;
+	
+}
+#username{
+font-size: large;
+font-weight: bold;
+font-family: monospace;
+}
+</style>
+</head>
+<body>
+<div class="card22">
+	<h2 style="color:white;" th:text="${username}" id="username"></h2><br>
+<h3 style="color: red;" th:text="${Noitem}" id="h3"></h3>
+</div>
+<div class="divtop">
+<div class="card card1">
+<a th:href="@{/selecteditem(value=${'ChickenBiryani'},username=${username})}" >
+<div class="dimg"><img alt="" src="image/pngwing.com (6).png" class="imgitem"></div>
+<div class="d"><h3 name="item" value="Chicken Biryani">Chicken Biryani</h3>
+<p>Biryani is prepared from basmati rice mixed with several spices and cooked in a special way. Chicken Biryani</p><br>
+</div>
+</a>
+</div>
+<div class="card card2">
+<a href="">
+<div class="d"><h3 name="item" >Noodles</h3>
+<p>Noodles are a staple food in many cultures around the world. They are made by mixing flour, water, and sometimes eggs into a dough, which is then rolled out and cut into thin strips.</p>
+</div>
+<div class="dimg"><img alt="" src="image/pngwing.com (7).png" class="imgitem"></div>
+</a>
+</div>
+<div class="card card1">
+<a href="selecteditem">
+<div class="dimg"><img alt="" src="image/pngwing.com (8).png" class="imgitem"></div>
+<div class="d"><h3 name="item" >Fish fry</h3>
+<p>This delicious, crispy & spicy fish fry makes for a great appetizer or a side to a meal. A simple vegetable salad or sliced onion compliment the fish fry. It can be served as a side with any variety rice like Ghee rice, cumin or Jeera rice, simple coconut rice</p>
+</div>
+</a>
+</div>
+<div class="card card2">
+<a href="">
+<div class="d"><h3 name="item" >Dum Biryani</h3>
+<p>The air carries the aromatic notes of saffron, spices and slow-cooked meat, teasing your nose. The soft rice with juicy meat all mixed with the mouth-watering masala creates an amazing experience with a tasty memory, lingering even after the last bite</p>
+
+</div>
+<div class="dimg"><img alt="" src="image/pngwing.com (5).png" class="imgitem"></div>
+</a>
+</div>
+<div class="card card1">
+<a href="">
+<div class="dimg"><img alt="" src="image/pngwing.com (11).png" class="imgitem"></div>
+<div class="d"><h3 name="item" >Chicken Lollipop</h3>
+<p>have a nice look and the legs are easier to eat and can be less fussy for those who like to hold them in their hand.</p>
+
+</div>
+</a>
+</div>
+<div class="card card2">
+<a href="">
+<div class="d"><h3 name="item" >Chicken Heart and Liver</h3>
+<p>Rich in essential vitamins and minerals, they are ideal for creating traditional dishes like , stir-fries, and gravies. Their tender texture and robust flavour make them a gourmet delight for both everyday meals and special occasions.</p>
+
+</div>
+<div class="dimg"><img alt="" src="image/pngwing.com (12).png" class="imgitem"></div>
+</a>
+</div>
+<div class="card card1">
+<a href="">
+<div class="dimg"><img alt="" src="image/food2.png" class="imgitem"></div>
+<div class="d"><h3 name="item" >Chicken Manchurian</h3>
+<p>Chicken Manchurian is a popular Hakka, Indo-Chinese dish that perfectly combines the flavors of tender chicken with a tangy, spicy sauce that has a hint of sweetness to it</p>
+
+</div>
+</a>
+</div>
+<div class="card card2">
+<a href="">
+<div class="d"><h3 name="item" >Mandi Biryani</h3>
+<p>Traditionally baked in an oven like the Indian tandoor the meat is cooked over the rice so it absorbs the cooking juices</p>
+
+</div>
+<div class="dimg"><img alt="" src="image/food1.png" class="imgitem"></div>
+</a>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="image/inovate-logo.png.jpg">
+<style type="text/css">
+*{
+margin: 0%;
+padding: 0%;
+}
+body,.top {
+	width: 100%;
+	height: 500vh;
+	background: linear-gradient(75deg,black,rgba(1, 1, 89, 0.823));
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+.div_top{
+	widows: 100%;
+	height: 20vh;
+	display: flex;
+	justify-content:flex-end;
+	align-items: center;
+	background-image: url("image/Black Minimal Grand Opening Banner.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top ;
+	background-attachment: fixed;
+	flex-wrap: wrap;
+}
+.search_top{
+width: 27%;
+height: 10vh;
+display: flex;
+align-items: center;
+}
+.log{
+justify-content: center;
+}
+.search{
+width: 350px;
+height: 27px;
+border-radius: 10px 10px;
+outline: none;
+border: none;
+position: absolute;
+font-weight: bold;
+font-size: medium;
+}
+#icon{
+position:absolute;
+margin-left: 330px;
+color: orange;
+}
+.login{
+width: 100px;
+height: 30px;
+border-radius: 10px 10px;
+outline: none;
+border: none;
+color: orange;
+font-size: medium;
+}
+.icons{
+width: 100%;
+height: 30px;
+background:white;
+position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+a{
+text-decoration: none;
+}
+.scroll{
+width: 100%;
+height: 50vh;
+display:flex;
+overflow: hidden;
+justify-content: center;
+/*background-image: url("image/flowers.webp");*/
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover; 
+}
+#img-scroll-link,#img-scroll{
+width: 100%;
+height: 50vh;
+transition-duration: 5s;
+}
+.card-formate{
+width: 100%;
+height: 100vh;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+align-items: center;
+}
+.card{
+width:250px;
+height:250px;
+background-color: rgba(255, 255, 255, 0.21);
+border-radius: 50px;
+overflow: hidden;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction:column;
+transition: all 2s ease-in;
+}
+.card:hover {
+	transform: scale(1.12,1.12); 
+}
+.cardimg{
+width:100%;
+height:100%;
+}
+#wellcome{
+color: white;
+}
+#username{
+font-size:large;
+font-weight:bold;
+font-family:monospace;
+color: white;
+}
+</style>
+</head>
+<body onload="scroll()">
+<div class="top">
+<div class="div_top">
+<div class="search_top searcin"><input type="text" class="search"><i class="fa-solid fa-magnifying-glass" id="icon"></i></div>
+<div class="search_top log">
+<form action="">
+<span id="wellcome">Wellcome to </span><span th:text="${msg}" id="username"></span>
+</form>
+</div>
+</div>
+<div class="icons" id="navbar">
+<div><a href="#"><i class="fa-solid fa-house"></i><small>Home</small></a></div>
+<div><a href="#"><i class="fa-solid fa-user"></i><small>Account</small></a></div>
+<div><a href="#"><i class="fa-solid fa-bell"></i><small>Notification</small></a></div>
+<div><a href="#"><i class="fa-solid fa-cart-shopping"></i><small>Cart</small></a></div>
+</div>
+<div class="scroll" id="scroll-img" >
+<a href="" id="img-scroll-link"><img alt="" src="" id="img-scroll"></a>
+</div>
+<div class="card-formate">
+<div class="card card-formate1">
+<a th:href="@{/menuitem(username=${msg})}" id="img-scroll-link"><img alt="" src="image/food1.png" class="cardimg"></a>
+</div>
+<div class="card card-formate2">
+<a href="menuitem" id="img-scroll-link"><img alt="" src="image/pngwing.com (11).png" class="cardimg"></a>
+</div>
+<div class="card card-formate3">
+<a href="menuitem" id="img-scroll-link"><img alt="" src="image/pngwing.com (5).png" class="cardimg"></a>
+</div>
+<div class="card card-formate4">
+<a href="menuitem" id="img-scroll-link"><img alt="" src="image/pngwing.com (6).png" class="cardimg"></a>
+</div>
+<div class="card card-formate5">
+<a href="menuitem" id="img-scroll-link"><img alt="" src="image/pngwing.com (7).png" class="cardimg"></a>
+</div>
+<div class="card card-formate6">
+<a href="menuitem" id="img-scroll-link"><img alt="" src="image/pngwing.com (8).png" class="cardimg"></a>
+</div>
+<div class="card card-formate7">
+<a href="menuitem" id="img-scroll-link"><img alt="" src="image/food2.png" class="cardimg"></a>
+</div>
+<div class="card card-formate8">
+<a href="menuitem" id="img-scroll-link"><img alt="" src="image/pngwing.com (12).png" class="cardimg"></a>
+</div>
+</div>
+</div>
+<script >
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+ }
+ 
+async function scroll() {
+	for(var j=1;j<=3;j++){
+		if (j==1) {
+			document.getElementById("img-scroll").src="image/food1.png";
+		}
+		else if (j==2) {
+			document.getElementById("img-scroll").src="image/food2.png";
+		}
+		else if (j==3) {
+			document.getElementById("img-scroll").src="image/Black Minimal Grand Opening Banner.png";
+			scrolll();
+		}
+		await sleep(6000);
+	}
+}
+async function scrolll() {
+	for(var i=3;i>=1;i--){
+		if (i==1) {
+			await sleep(6000);
+			document.getElementById("img-scroll").src="image/food1.png";
+			scroll();
+		}
+		else if (i==2) {
+			await sleep(6000);
+			document.getElementById("img-scroll").src="image/food2.png";
+			}
+		else if (i==3) {
+			await sleep(6000);
+			document.getElementById("img-scroll").src="image/Black Minimal Grand Opening Banner.png";
+		}
+		
+		
+	}
+}
+</script>
+</body>
+</html>
