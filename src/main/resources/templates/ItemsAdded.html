@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style type="text/css">
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2 class="text-center mb-4">Upload a Product</h2>
+
+                <form action="/upload" method="POST" enctype="multipart/form-data" class="border p-4 shadow-sm rounded">
+                    <div class="row">
+                        <!-- First Column -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="itemname" class="form-label">Product Name</label>
+                                <input type="text" name="itemname" id="itemname" class="form-control" placeholder="Enter product name" required>
+                            </div>
+                           
+                            <div class="mb-3">
+                                <label for="cost" class="form-label">Product Amount</label>
+                                <input type="number" name="cost" id="cost" class="form-control" placeholder="Enter product amount" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="itemdiscription" class="form-label">Product Description</label>
+                                <input type="text" name="itemdiscription" id="itemdiscription" class="form-control" placeholder="Enter product description" required>
+                            </div>
+                        </div>
+                        
+                        <!-- Second Column -->
+                        <div class="col-md-6">
+                         <div class="mb-3">
+                                <label for="image" class="form-label">Select Image</label>
+                                <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="quantiy" class="form-label">Product Quantity</label>
+                                <input type="number" name="quantiy" id="quantiy" class="form-control" placeholder="Enter product quantity" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="itemType" class="form-label">Product Type</label>
+                                <select class="form-select" name="itemType" required>
+                                    <option selected>Select Item Type</option>
+                                    <option value="Biriyani">Biriyani</option>
+                                    <option value="Noodles">Noodles</option>
+                                    <option value="Starters">Starters</option>
+                                    <option value="Fish">Fish</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

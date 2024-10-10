@@ -1,16 +1,24 @@
 package com.example.Innovationproject.controller;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.Innovationproject.InnovationMainProjectApplication;
+import com.example.Innovationproject.dao.AddCartDao;
 import com.example.Innovationproject.dao.Dao;
 import com.example.Innovationproject.dao.ItemsDao;
+import com.example.Innovationproject.daoimp.ItemsDaoImp;
+import com.example.Innovationproject.entity.AddCart;
 import com.example.Innovationproject.entity.ItemPrices;
 import com.example.Innovationproject.entity.UserData;
 import com.example.Innovationproject.otp.EmailSenderservice;
@@ -25,6 +33,8 @@ public class LoginController {
 	@Autowired
 	private ItemsDao itemsDao;
 	
+	@Autowired
+	private AddCartDao addCartDao;
 	
 	@Autowired
 	private EmailSenderservice emailSenderservice;
@@ -33,6 +43,7 @@ public class LoginController {
 	public String loginpage() {
 		return "login.html";
 	}
+	
 	
 	@RequestMapping("/signpage")
 	public String signpage() {
@@ -74,6 +85,15 @@ public class LoginController {
 			mv=new ModelAndView("homepage.html");
 			mv.addObject("msg",usernameString);
 			usernameString="";
+			List<ItemPrices> products = itemsDao.findAll();
+			for (ItemPrices product : products) {
+	            if (product.getImgData() != null) {
+	                String encodedImage = Base64.encodeBase64String(product.getImgData());
+	                product.setEncodedImage(encodedImage); // Add encodedImage field in ItemPrices class
+	            }
+	        }
+			
+			mv.addObject("products", products);
 			return mv;
 		}
 		else {
@@ -218,29 +238,65 @@ public class LoginController {
 }
 	@RequestMapping("/menuitem")
 	public String menuitem(@RequestParam("username") String username, Model model) {
+		
+		List<ItemPrices> products = itemsDao.findAll();
+		for (ItemPrices product : products) {
+            if (product.getImgData() != null) {
+                String encodedImage = Base64.encodeBase64String(product.getImgData());
+                product.setEncodedImage(encodedImage); // Add encodedImage field in ItemPrices class
+            }
+        }
 		model.addAttribute("username", username);
+		model.addAttribute("products", products);
 		return "itemdetails.html";
 		
 	}
 	
 	
 	@RequestMapping("/selecteditem")
-	public ModelAndView selecteditem(@RequestParam(name = "value",required = false,defaultValue = "default") String itemname,@RequestParam(name = "username",required = false,defaultValue = "default") String usename) {
+	public ModelAndView selecteditem(@RequestParam(name = "itemname",required = false,defaultValue = "default") String itemname,@RequestParam(name = "username",required = false,defaultValue = "default") String usename) {
 		ModelAndView mView;
-		ItemPrices itemsDaoobject=itemsDao.findByItemname(itemname);
-		if(itemsDaoobject!=null) {
-			mView=new ModelAndView("itemselect.html");
+		ItemPrices itemsDaoObject=itemsDao.findByItemname(itemname);
+		
+		if(itemsDaoObject!=null) {
+			String encodedImage = Base64.encodeBase64String(itemsDaoObject.getImgData());
+            itemsDaoObject.setEncodedImage(encodedImage); // Add encodedImage field in ItemPrices class
+			mView=new ModelAndView("Itemselect.html");
 			mView.addObject("username", usename);
-			mView.addObject("Itemserial",itemsDaoobject.getItemserial());
-			mView.addObject("Itemname",itemsDaoobject.getItemname());
-			mView.addObject("Itemcost",itemsDaoobject.getCost());
+			mView.addObject("Item",itemsDaoObject);
+			
 		}
 		else {
-			mView=new ModelAndView("itemdetails.html");
+			mView=new ModelAndView("Itemdetails.html");
 			mView.addObject("username", usename);
 			mView.addObject("Noitem","Item was not a present Now... Choosice Nother one");
 		}
 		return mView;
 		
 	}
+	
+	
+	@RequestMapping("/addCart")
+	public String addCart(@RequestParam(name = "itemserial",required = false,defaultValue = "default") int itemserial,@RequestParam(name = "username",required = false,defaultValue = "default") String username,Model model) {
+		AddCart addCart=new AddCart();
+		addCart.setItemserialid(itemserial);
+		addCart.setUsername(username);
+		addCartDao.save(addCart);
+		ItemPrices itemPrices=new ItemPrices();
+		itemPrices=itemsDao.findByItemSerial(itemserial);
+		
+		
+		if(itemPrices!=null) {
+			String encodedImage = Base64.encodeBase64String(itemPrices.getImgData());
+			itemPrices.setEncodedImage(encodedImage); // Add encodedImage field in ItemPrices class
+			model.addAttribute("username", username);
+			model.addAttribute("Item", itemPrices);
+			
+		}
+		
+		return "Itemselect";
+	}
+	
+	
+	
 }
